@@ -1,11 +1,12 @@
 class bag:
     def __init__(self):
-        self.items = []
+        self.container  = []
 
     def insert(self, item):
         if self.exists == True:
-            return False
-        self.append(item)
+            return false
+        self.container.append(item)
+        return True
 
     def delete(self, item):
         if self.exists == True:
@@ -32,6 +33,6 @@ class bag:
 
     def size(self):
         size = 0
-        for i in range(len(self)):
+        for i in range(len(self.container)):
             size += 1
         return size
