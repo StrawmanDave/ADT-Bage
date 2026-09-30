@@ -69,6 +69,6 @@ def main():
 
     print(f"Average age of retrieved: {average}")
     print(f"Retrieve time: {elapsed}")
-    print(f"Size after Retrieveb.Size()")
+    print(f"Size after Retrieve b.Size()")
          
 main()
