@@ -7,61 +7,68 @@ import time
 def main():
     b = bag.bag()
     
-    all_age = 0
-    student_amount = 0
+    total_age = 0
     start_time = time.perf_counter()
-        
-    #open fakenames.txt data read eachline make a studdent put in bag
-    with open('FakeNames.txt', 'r') as file:
+
+    with open("FakeNames.txt", 'r') as file:
         for line in file:
             words = line.split(" ")
             new_student = student.student(words[0], words[1], words[2], words[3], words[4])
-            if(b.insert(new_student) == False):
-                print(f"error duplicate student {new_student}")
-    
-    for i in range(b.size()):
-        all_age = all_age + int(b.container[i].age)
-        
-    
+            if(b.Insert(new_student) == False):
+                print(f"Error duplicate student {new_student.first}")
+            total_age += int(new_student.age)
 
-    average = all_age // b.size()
     finish_time = time.perf_counter()
+
+    # print(total_age)
+    average = total_age // b.Size()
     elapsed = finish_time - start_time
-    print(average)
-    print(elapsed)
-    print(b.size)
 
-    with open('DeleteNames.txt,' 'r') as file:
-        start_time = time.perf_counter()
+    print(f"Average age of all: {average}")
+    print(f"Insert time: {elapsed}")
+    print(f"Size after insert: {b.Size()}")
+
+    start_time = time.perf_counter()
+
+    with open("DeleteNames.txt", 'r') as file:
         for line in file:
-            temp = student.student("", "", "", line.strip, "", "")
-            if(b.delete(temp)== False):
-                print(f"error no item found to delete {temp.ssn}")
-    finish_time = time.perf_counter()
-    elapsed = finished - start_time
-    print(elapsed)
-    print(b.size())
+            ssn = line.strip()
+            # print(ssn)
+            temp = student.student("", "", ssn, "", "")
+            if(b.Delete(temp) == False):
+                print(f"Error no item found to delete {temp.ssn}")
 
-    with open('RetrieveNames.txt', 'r')as file:
-            for line in file:
-                start_time = time.perf_counter()
-                temp = student.student("", "", "",line.strip, "", "")
-                if(b.retrieve(temp) == false):
-                    print(f"error no item found{temp.ssn}")
-                    continue
-                    student_retrieved = b.retrieve(temp)
-                    all_age = all_age + int(student_retrieved.age)
-                    student_amount = student_amount + 1
     finished_time = time.perf_counter()
-    average = all_age // student_amount
     elapsed = finished_time - start_time
-    print(average)
-    print(elapsed)
-    print(b.size)
-    
-                
-                 
-main()
 
-    
-                
+    print(f"Delete time: {elapsed}")
+    print(f"Size after delete: {b.Size()}")
+
+    total_age = 0
+    count = 0 
+
+    start_time = time.perf_counter()
+
+    with open("RetrieveNames.txt", 'r')as file:
+            for line in file:
+                ssn = line.strip()
+                temp = student.student("", "", ssn, "", "")
+
+                found = b.Retrive(temp)
+
+                if(found == False):
+                    print(f"Error no item found {temp.ssn}")
+                else:
+                    total_age += int(found.age)
+                    count += 1
+
+    finished_time = time.perf_counter()
+
+    average = total_age // count
+    elapsed = finished_time - start_time
+
+    print(f"Average age of retrieved: {average}")
+    print(f"Retrieve time: {elapsed}")
+    print(f"Size after Retrieveb.Size()")
+         
+main()

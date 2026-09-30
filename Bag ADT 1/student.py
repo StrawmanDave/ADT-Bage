@@ -5,6 +5,9 @@ class student:
         self.ssn = ssn
         self.email = email
         self.age = age
-    # init first name, last name, ssn, email, age
+
+
     def __eq__(self, rhs):
+        if not isinstance(rhs, student):    # to make sure it doesn't try to check if a student is equal to a clown
+            return False                    # well if it does it returns false 
         return self.ssn == rhs.ssn
